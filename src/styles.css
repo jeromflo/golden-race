@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+.mx-05 {
+    margin-right: 0.125rem !important;
+    margin-left: 0.125rem !important;
+}

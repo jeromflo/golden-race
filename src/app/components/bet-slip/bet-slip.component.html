@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-body">
+
+
+        <div class="row col">
+            <div class="col-sm-12">
+                <button *ngFor="let ball of selectedBalls let i=index" class='{{getColor(ball-1)}}'>
+
+                    <p class="h5">{{ball.toString().length==1?' 0'+ball:ball}}</p>
+                </button>
+
+            </div>
+        </div>
+        <div class="mt-4 row col">
+            <div class="col-sm-12">
+                <div class="input-group" [formGroup]="formData">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text ">
+                            <p class="h4">{{selectedBalls.length}}X</p>
+                        </span>
+                    </div>
+                    <input type="text" formControlName="amount" class="form-control">
+
+                    <div class=" mx-4 col-sm-4">
+
+                        <!--                     <div class="input-group-prepend">
+                        <span class="input-group-text">5x</span>
+                    </div> -->
+                        <button class="btn btn-info px-4">
+                            <p class="h4">Ok</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title b">
+            <h3><strong>Numbers</strong></h3>
+        </h5>
+        <div class="col">
+            <button *ngFor="let ball of ballsNumber let i=index" (click)="selectedBall(ball)" class='{{getColor(i)}}' [disabled]=' isDisabled(ball) '>
+
+                <p class="h1">{{ball.toString().length==1?' 0'+ball:ball}}</p>
+            </button>
+        </div>
+    </div>
+</div>
