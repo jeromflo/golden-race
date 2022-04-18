@@ -69,10 +69,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "golden_race:build:production"
+                            "browserTarget": "build:production"
                         },
                         "development": {
-                            "browserTarget": "golden_race:build:development"
+                            "browserTarget": "build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -99,9 +99,19 @@
                         ],
                         "scripts": []
                     }
+                },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "eslintConfig": ".eslintrc.js",
+                        "lintFilePatterns": [
+                            "**/*.spec.ts",
+                            "**/*.ts"
+                        ]
+                    }
                 }
             }
-        }
-    },
-    "defaultProject": "golden_race"
+        },
+        "defaultProject": "golden_race"
+    }
 }
