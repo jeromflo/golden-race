@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public ballsNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  public ballsNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];//NOTE [RULES-FCT-03-M]
   public colours = ['primary', 'success', 'danger', 'warning', 'info']
   public coloursButtons: string[] = [];
   public readonly TOTALAMOUN: number = 500;
@@ -35,12 +35,12 @@ export class AppComponent {
 
   }
   pay() {
-    let random = Math.floor(Math.random() * this.ballsNumber.length)
+    let random = Math.floor(Math.random() * this.ballsNumber.length)//NOTE [RULES-FCT-04-M]
     let total = this.ballsSelected!.amountPay;
     if (this.ballsSelected?.selectedBalls.includes(random)) {
       console.log((this.ballsSelected!.amountPay / this.ballsSelected!.selectedBalls.length) * this.multiplerProfit);
       this.store.dispatch(actions.setRandom({ value: random }))
-      total -= (this.ballsSelected!.amountPay / this.ballsSelected!.selectedBalls.length) * this.multiplerProfit;
+      total -= (this.ballsSelected!.amountPay / this.ballsSelected!.selectedBalls.length) * this.multiplerProfit;//NOTE [RULES-FCT-05-M]
     }
     this.store.dispatch(actions.addAmountUsed({ value: total }))
   }

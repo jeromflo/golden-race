@@ -44,6 +44,12 @@ const reducer = createReducer(initialValue,
 
         return copy;
     }),
+    on(actions.resetSelection, (state: IApplication) => {
+        let copy: IApplication = JSON.parse(JSON.stringify(state));
+        copy.selectedBalls = [];
+
+        return copy;
+    }),
 )
 export function reducerBallsSelected(state: any, actions: any): IApplication {
     return reducer(state, actions);

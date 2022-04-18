@@ -34,7 +34,7 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
 
   }
-  selectedBall(ballNumber: number) {
+  selectedBall(ballNumber: number) {//NOTE [RULES-FCT-02-M] 
     this.store.dispatch(actions.setBall({ value: ballNumber }))
   }
   isDisabled(ballNumber: number) {
@@ -43,5 +43,8 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
   getColor(i: number) {
 
     return `btn btn-${this.coloursButtons[i]} rounded-circle mx-2`;
+  }
+  reset() {
+    this.store.dispatch(actions.resetSelection())
   }
 }

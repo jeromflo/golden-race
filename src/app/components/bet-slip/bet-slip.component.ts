@@ -32,7 +32,7 @@ export class BetSlipComponent implements OnInit {
     })
 
     this.formData = this.fb.group({
-      amount: [this.amount, [Validators.required, Validators.min(this.MINIMUNBET)]]
+      amount: [this.amount, [Validators.required, Validators.min(this.MINIMUNBET)]]//NOTE [RULES-FCT-05-M]
 
     })
 
