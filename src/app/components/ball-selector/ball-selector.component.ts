@@ -1,5 +1,5 @@
 import * as actions from './../redux/actions/ballsSelected.actions';
-import { IBallsSelected } from './../../interfaces/ballsSelected';
+import { IApplication } from './../../interfaces/ballsSelected';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
@@ -10,16 +10,18 @@ import { Store } from '@ngrx/store';
 })
 export class BallSelectorComponent implements OnInit, OnDestroy {
   @Input() ballsNumber: number[] = [];
-  @Input() colours: string[] = []
+  @Input() colours: string[] = [];
+  public result: number = -1;
   public coloursButtons: string[] = [];
   public selectedBalls: number[] = [];
 
-  constructor(private store: Store<{ ballsSelected: IBallsSelected }>) {
-    this.store.select('ballsSelected').subscribe((ballsSelected: IBallsSelected) => {
+  constructor(private store: Store<{ ballsSelected: IApplication }>) {
+    this.store.select('ballsSelected').subscribe((ballsSelected: IApplication) => {
       console.log(ballsSelected);
 
       this.selectedBalls = ballsSelected.selectedBalls;
       this.coloursButtons = ballsSelected.coloursButtons;
+      this.result = ballsSelected.randomWins;
     })
 
 
