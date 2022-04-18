@@ -1,6 +1,9 @@
+import { Store, StoreModule } from '@ngrx/store';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BetSlipComponent } from './bet-slip.component';
+import { reducerBallsSelected } from '../redux/reducers/ballsSelected.reducer';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('BetSlipComponent', () => {
   let component: BetSlipComponent;
@@ -8,9 +11,11 @@ describe('BetSlipComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BetSlipComponent ]
+      declarations: [BetSlipComponent], imports: [StoreModule.forRoot({ ballsSelected: reducerBallsSelected }), FormsModule, ReactiveFormsModule
+      ],
+      providers: [Store, FormBuilder]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

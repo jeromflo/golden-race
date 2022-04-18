@@ -42,7 +42,7 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
   }
   getColor(i: number) {
 
-    return `btn btn-${this.coloursButtons[i]} rounded-circle mx-2`;
+    return `btn btn-${this.coloursButtons[i]} rounded-circle mx-2 mb-2`;
   }
   reset() {
     this.store.dispatch(actions.resetSelection())

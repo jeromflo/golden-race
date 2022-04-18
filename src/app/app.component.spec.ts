@@ -1,16 +1,19 @@
+import { Store, StoreModule } from '@ngrx/store';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { reducerBallsSelected } from './components/redux/reducers/ballsSelected.reducer';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule, StoreModule.forRoot({ ballsSelected: reducerBallsSelected })
       ],
       declarations: [
         AppComponent
-      ],
+      ], providers: [Store]
+
     }).compileComponents();
   });
 

@@ -28,7 +28,8 @@
                         ],
                         "styles": [
                             "src/styles.css",
-                            "node_modules/bootstrap/dist/css/bootstrap.min.css"
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "node_modules/sweetalert2/dist/sweetalert2.min.css"
                         ],
                         "scripts": [
                             "node_modules/bootstrap/dist/js/bootstrap.min.js"
@@ -68,10 +69,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "golden_race:build:production"
+                            "browserTarget": "build:production"
                         },
                         "development": {
-                            "browserTarget": "golden_race:build:development"
+                            "browserTarget": "build:development"
                         }
                     },
                     "defaultConfiguration": "development"
