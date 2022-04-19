@@ -11,14 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./bet-slip.component.css']
 })
 export class BetSlipComponent implements OnDestroy {
-  public ballsNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   public coloursButtons: string[] = [];
   public selectedBalls: number[] = [];
-  public readonly TOTALAMOUN: number = 500;
   public amount: number = 0;
-  public amountUsed: number = 0;
-  public multipliquerProfit: number = 1.5;
-  public MINIMUNBET: number = 5;
+  public minimunBet: number = 5;
   public formData: FormGroup;
   private subscription: Subscription[] = [];
 
@@ -29,11 +25,11 @@ export class BetSlipComponent implements OnDestroy {
       this.coloursButtons = ballsSelected.coloursButtons;
       this.selectedBalls = ballsSelected.selectedBalls;
       this.amount = ballsSelected.amountPay;
-      this.amountUsed = ballsSelected.amountUsed;
+      this.minimunBet = ballsSelected.MINUSED;
     })
 
     this.formData = this.fb.group({
-      amount: [this.amount, [Validators.required, Validators.min(this.MINIMUNBET)]]//NOTE [RULES-FCT-05-M]
+      amount: [this.amount, [Validators.required, Validators.min(this.minimunBet)]]//NOTE [RULES-FCT-05-M]
 
     })
 
@@ -44,10 +40,18 @@ export class BetSlipComponent implements OnDestroy {
     this.subscription.forEach(el => el.unsubscribe())
   }
 
+  /**
+   * funcion que disapra el cambio en el amountPay
+   */
   submitData() {
 
     this.store.dispatch(actions.setAmountPay({ value: this.selectedBalls.length * parseInt(this.formData.get('amount')!.value) }))
   }
+  /**
+   * 
+   * @param i  numero de la bola menos uno para coger el color
+   * @returns string con la clase que le pertenece
+   */
   getColor(i: number) {
 
     return `btn btn-${this.coloursButtons[i]} rounded-circle mx-2`;
