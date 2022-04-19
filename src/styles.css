@@ -354,6 +354,54 @@ select {
     border-color: #f8f9fa;
 }
 
+button:disabled {
+    background-color: -internal-light-dark( rgba(239, 239, 239, 0.3), rgba(19, 1, 1, 0.3));
+    color: -internal-light-dark(rgba(16, 16, 16, 0.3), rgba(255, 255, 255, 0.3));
+    border-color: -internal-light-dark( rgba(118, 118, 118, 0.3), rgba(195, 195, 195, 0.3));
+}
+
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+    pointer-events: none;
+    opacity: 0.65;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-info.disabled,
+.btn-info:disabled {
+    color: #000;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+}
+
+.btn-danger.disabled,
+.btn-danger:disabled {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-warning.disabled,
+.btn-warning:disabled {
+    color: #000;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-success.disabled,
+.btn-success:disabled {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+}
+
 .rounded-circle {
     border-radius: 50% !important;
 }
