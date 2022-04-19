@@ -28,9 +28,6 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnInit(): void {
-
-  }
   ngOnDestroy() {
     this.subscription.forEach(el => el.unsubscribe())
   }

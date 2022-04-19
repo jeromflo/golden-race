@@ -6,7 +6,7 @@
             <div class="col-sm-12">
                 <button *ngFor="let ball of selectedBalls let i=index" class='{{getColor(ball-1)}}'>
 
-                    <p class="h5">{{ball.toString().length==1?' 0'+ball:ball}}</p>
+                    <p class="h5">{{ball.toString().length===1?' 0'+ball:ball}}</p>
                 </button>
 
             </div>

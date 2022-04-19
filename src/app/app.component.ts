@@ -1,7 +1,7 @@
 import * as actions from './components/redux/actions/ballsSelected.actions';
 import { IApplication } from './interfaces/ballsSelected';
 import { Store } from '@ngrx/store';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   public ballsNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];//NOTE [RULES-FCT-03-M]
   public colours = ['primary', 'success', 'danger', 'warning', 'info']
   public coloursButtons: string[] = [];

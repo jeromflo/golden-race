@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import * as actions from './../redux/actions/ballsSelected.actions';
 import { IApplication } from './../../interfaces/ballsSelected';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './bet-slip.component.html',
   styleUrls: ['./bet-slip.component.css']
 })
-export class BetSlipComponent implements OnInit {
+export class BetSlipComponent implements OnInit, OnDestroy {
   public ballsNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   public coloursButtons: string[] = [];
   public selectedBalls: number[] = [];
@@ -43,8 +43,7 @@ export class BetSlipComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.forEach(el => el.unsubscribe())
   }
-  ngOnInit(): void {
-  }
+
   submitData() {
 
     this.store.dispatch(actions.setAmountPay({ value: this.selectedBalls.length * parseInt(this.formData.get('amount')!.value) }))
