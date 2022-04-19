@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './ball-selector.component.html',
   styleUrls: ['./ball-selector.component.css']
 })
-export class BallSelectorComponent implements OnInit, OnDestroy {
+export class BallSelectorComponent implements OnDestroy {
   @Input() ballsNumber: number[] = [];
   @Input() colours: string[] = [];
   public result: number = -1;

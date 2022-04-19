@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './bet-slip.component.html',
   styleUrls: ['./bet-slip.component.css']
 })
-export class BetSlipComponent implements OnInit, OnDestroy {
+export class BetSlipComponent implements OnDestroy {
   public ballsNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   public coloursButtons: string[] = [];
   public selectedBalls: number[] = [];
