@@ -26,7 +26,7 @@ const reducer = createReducer(initialValue,
         console.log(value);
 
         let copy: IApplication = JSON.parse(JSON.stringify(state));
-        if (value > initialValue.MINUSED && (value + initialValue.amountUsed) < initialValue.MAXUSED) {
+        if (value >= initialValue.MINUSED && (value + initialValue.amountUsed) < initialValue.MAXUSED) {
             copy.amountPay = value;
         }
         return copy;

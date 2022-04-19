@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import * as actions from './../redux/actions/ballsSelected.actions';
 import { IApplication } from './../../interfaces/ballsSelected';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
@@ -14,11 +15,10 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
   public result: number = -1;
   public coloursButtons: string[] = [];
   public selectedBalls: number[] = [];
+  private subscription: Subscription[] = [];
 
   constructor(private store: Store<{ ballsSelected: IApplication }>) {
-    this.store.select('ballsSelected').subscribe((ballsSelected: IApplication) => {
-      console.log(ballsSelected);
-
+    this.subscription[0] = this.store.select('ballsSelected').subscribe((ballsSelected: IApplication) => {
       this.selectedBalls = ballsSelected.selectedBalls;
       this.coloursButtons = ballsSelected.coloursButtons;
       this.result = ballsSelected.randomWins;
@@ -32,7 +32,7 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy() {
-
+    this.subscription.forEach(el => el.unsubscribe())
   }
   selectedBall(ballNumber: number) {//NOTE [RULES-FCT-02-M] 
     this.store.dispatch(actions.setBall({ value: ballNumber }))

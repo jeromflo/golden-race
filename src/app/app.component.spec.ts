@@ -1,38 +1,111 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IApplication } from './interfaces/ballsSelected';
+import { BetSlipComponent } from './components/bet-slip/bet-slip.component';
+import * as actions from './components/redux/actions/ballsSelected.actions';
 import { Store, StoreModule } from '@ngrx/store';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { reducerBallsSelected } from './components/redux/reducers/ballsSelected.reducer';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule, StoreModule.forRoot({ ballsSelected: reducerBallsSelected })
+        RouterTestingModule, StoreModule.forRoot({ ballsSelected: reducerBallsSelected }),
+        FormsModule, ReactiveFormsModule
       ],
       declarations: [
-        AppComponent
+        AppComponent, BetSlipComponent
       ], providers: [Store]
 
     }).compileComponents();
   });
-
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'golden_race'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('golden_race');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('golden_race app is running!');
+  });
+
+  it('should create', () => {
+    component.ngOnDestroy()
+    expect(component).toBeTruthy();
+  });
+  it('pay() with wins ', () => {
+
+    let store = TestBed.inject(Store);
+    for (let i = 1; i < 11; i++) {
+      store.dispatch(actions.setBall({ value: i }))
+    }
+    store.dispatch(actions.setAmountPay({ value: 100 }))
+    component.pay();
+    let randomWins = -1;
+    let amountUsed = 0;
+    let amountPay = 0;
+
+    store.select('ballsSelected').subscribe((el: IApplication) => {
+      console.log(el);
+      amountUsed = el.amountUsed;
+      amountPay = el.amountPay;
+      randomWins = el.randomWins;
+    })
+    expect(randomWins).toBeGreaterThan(-1);
+  });
+  it('pay() with wins and pay less  ', () => {
+
+    let store = TestBed.inject(Store);
+    for (let i = 1; i < 11; i++) {
+      store.dispatch(actions.setBall({ value: i }))
+    }
+    store.dispatch(actions.setAmountPay({ value: 100 }))
+    component.pay();
+    let randomWins = -1;
+    let amountUsed = 0;
+    let amountPay = 0;
+
+    store.select('ballsSelected').subscribe((el: IApplication) => {
+      console.log(el);
+      amountUsed = el.amountUsed;
+      amountPay = el.amountPay;
+      randomWins = el.randomWins;
+    })
+    expect(amountUsed).toBeLessThan(amountPay);
+  });
+  it('getTotal()   ', () => {
+
+    let store = TestBed.inject(Store);
+
+    store.dispatch(actions.setAmountPay({ value: 100 }))
+    let amountPay = 0;
+
+    store.select('ballsSelected').subscribe((el: IApplication) => {
+      console.log(el);
+      amountPay = el.amountPay;
+    })
+    expect(amountPay).toBe(100);
+  });
+
+  it('pay() no wins ', () => {
+
+    let store = TestBed.inject(Store);
+    /*   for (let i = 1; i < 11; i++) {
+        store.dispatch(actions.setBall({ value: i }))
+      } */
+    store.dispatch(actions.setAmountPay({ value: 100 }))
+    component.pay();
+    let randomWins = -1;
+    let amountUsed = 0;
+    let amountPay = 0;
+
+    store.select('ballsSelected').subscribe((el: IApplication) => {
+      console.log(el);
+      amountUsed = el.amountUsed;
+      amountPay = el.amountPay;
+      randomWins = el.randomWins;
+    })
+    expect(randomWins).toBe(-1);
   });
 });

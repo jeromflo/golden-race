@@ -2,6 +2,7 @@ import * as actions from './components/redux/actions/ballsSelected.actions';
 import { IApplication } from './interfaces/ballsSelected';
 import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
   public MINIMUNBET: number = 5;
   public ballsSelected: IApplication | null = null;
   public resultWins = -1;
+  private subscription: Subscription[] = [];
   constructor(private store: Store<{ ballsSelected: IApplication }>) {
 
     this.ballsNumber.forEach(ballNumber => {
@@ -25,20 +27,19 @@ export class AppComponent {
 
       this.coloursButtons.push(this.colours[random]);
     })
-    this.store.select('ballsSelected').subscribe((el: IApplication) => {
+    this.subscription[0] = this.store.select('ballsSelected').subscribe((el: IApplication) => {
       this.ballsSelected = el;
     })
 
     this.store.dispatch(actions.setColours({ value: this.coloursButtons }))
   }
   ngOnDestroy() {
-
+    this.subscription.forEach(el => el.unsubscribe())
   }
   pay() {
     let random = Math.floor(Math.random() * this.ballsNumber.length)//NOTE [RULES-FCT-04-M]
     let total = this.ballsSelected!.amountPay;
     if (this.ballsSelected?.selectedBalls.includes(random)) {
-      console.log((this.ballsSelected!.amountPay / this.ballsSelected!.selectedBalls.length) * this.multiplerProfit);
       this.store.dispatch(actions.setRandom({ value: random }))
       total -= (this.ballsSelected!.amountPay / this.ballsSelected!.selectedBalls.length) * this.multiplerProfit;//NOTE [RULES-FCT-05-M]
     }

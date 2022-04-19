@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import * as actions from './../redux/actions/ballsSelected.actions';
 import { IApplication } from './../../interfaces/ballsSelected';
 import { Component, OnInit } from '@angular/core';
@@ -19,16 +20,16 @@ export class BetSlipComponent implements OnInit {
   public multipliquerProfit: number = 1.5;
   public MINIMUNBET: number = 5;
   public formData: FormGroup;
+  private subscription: Subscription[] = [];
+
   constructor(private store: Store<{ ballsSelected: IApplication }>
     , private fb: FormBuilder
   ) {
-    this.store.select('ballsSelected').subscribe((ballsSelected: IApplication) => {
+    this.subscription[0] = this.store.select('ballsSelected').subscribe((ballsSelected: IApplication) => {
       this.coloursButtons = ballsSelected.coloursButtons;
       this.selectedBalls = ballsSelected.selectedBalls;
       this.amount = ballsSelected.amountPay;
       this.amountUsed = ballsSelected.amountUsed;
-      console.log('amount used', this.amountUsed);
-
     })
 
     this.formData = this.fb.group({
@@ -38,6 +39,9 @@ export class BetSlipComponent implements OnInit {
 
 
 
+  }
+  ngOnDestroy() {
+    this.subscription.forEach(el => el.unsubscribe())
   }
   ngOnInit(): void {
   }
