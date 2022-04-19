@@ -1,28 +1,25 @@
-<div class="wrapper">
-    <!--ftmenu [userRoles]="['ALL']"></ftmenu-->
-    <div class="content">
-        <div class="mt-5 mx-4">
+<div class="content">
+    <div class="mt-5 mx-4">
 
-            <div class="row ">
-                <div class="col-sm-8 col-xl-8">
-                    <app-ball-selector [ballsNumber]="ballsNumber" [colours]="colours">
-                    </app-ball-selector>
+        <div class="row ">
+            <div class="col-sm-8 col-xl-8">
+                <app-ball-selector [ballsNumber]="ballsNumber" [colours]="colours">
+                </app-ball-selector>
+            </div>
+            <div class="col">
+                <app-bet-slip></app-bet-slip>
+
+                <div class="mx-05 mt-4 row  col-sm-12">
+                    <div class="text-center bg-light text-dark">
+                        <p class="h5">USED: {{ballsSelected?.amountUsed}}€</p>
+                        <p class="h5">TOTAL: {{getTotal()}}€</p>
+                    </div>
                 </div>
-                <div class="col">
-                    <app-bet-slip></app-bet-slip>
 
-                    <div class="mx-05 mt-4 row  col-sm-12">
-                        <div class="text-center bg-light text-dark">
-                            <p class="h5">USED: {{ballsSelected?.amountUsed}}€</p>
-                            <p class="h5">TOTAL: {{getTotal()}}€</p>
-                        </div>
-                    </div>
-
-                    <div class="mx-05 mt-4 row  col-sm-12">
-                        <button class=" btn btn-primary" (click)="pay()">
-                            <p class="h5"> PLACE BET</p>
-                        </button>
-                    </div>
+                <div class="mx-05 mt-4 row  col-sm-12">
+                    <button class=" btn btn-primary" (click)="pay()">
+                        <p class="h5"> PLACE BET</p>
+                    </button>
                 </div>
             </div>
 

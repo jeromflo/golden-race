@@ -8,7 +8,7 @@
         </h5>
         <div *ngIf="result===-1" class="col ">
             <!-- NOTE [RULES-FCT-01-M] -->
-            <button *ngFor="let ball of ballsNumber let i=index" (click)="selectedBall(ball)" class='{{getColor(i)}}' [disabled]=' isDisabled(ball) '>
+            <button *ngFor="let ball of ballsNumber let i=index" (click)="selectedBall(ball)" class='{{getColor(i)}} ' [disabled]=' isDisabled(ball) '>
 
                 <p class="h1">{{ball.toString().length==1?' 0'+ball:ball}}</p>
             </button>
